@@ -5,6 +5,7 @@ import MapView, {
 } from './lib/components/MapView';
 import Marker from './lib/components/MapMarker.js';
 import Overlay from './lib/components/MapOverlay.js';
+import { NativeModules } from 'react-native'
 
 export { default as Polyline } from './lib/components/MapPolyline.js';
 export { default as Heatmap } from './lib/components/MapHeatmap.js';
@@ -28,5 +29,24 @@ export const PROVIDER_DEFAULT = MapView.PROVIDER_DEFAULT;
 
 export const MarkerAnimated = Marker.Animated;
 export const OverlayAnimated = Overlay.Animated;
+
+class RNGMSService {
+ 
+  provideAPIKey(key, provider) {
+    if (Platform.OS === 'android') {
+      return;
+    }
+    if (provider !== PROVIDER_GOOGLE) {
+      return;
+    }
+
+    const RNGMSServiceNative = NativeModules.RNGMSService;
+
+		RNGMSServiceNative.provideAPIKey(key)
+  }
+
+}
+
+export const rnGMSService = new RNGMSService()
 
 export default MapView;

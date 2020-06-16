@@ -266,6 +266,17 @@ declare module "react-native-maps" {
     kmlSrc?: string;
   }
 
+  class RNGMSServiceNative  {
+    public provideAPIKey(key: string): void;
+  }
+
+  class RNGMSService  {
+    /**
+     * Sets the google maps api key for iOS
+     */
+    public provideAPIKey(key: string): void;
+  }
+
   export default class MapView extends React.Component<MapViewProps, any> {
     getCamera(): Promise<Camera>;
     setCamera(camera: Partial<Camera>): void;

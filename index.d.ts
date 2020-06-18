@@ -270,7 +270,7 @@ declare module "react-native-maps" {
     public provideAPIKey(key: string): void;
   }
 
-  class RNGMSService  {
+  export class RNGMSService  {
     /**
      * Sets the google maps api key for iOS
      */

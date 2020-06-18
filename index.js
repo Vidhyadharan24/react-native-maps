@@ -30,7 +30,7 @@ export const PROVIDER_DEFAULT = MapView.PROVIDER_DEFAULT;
 export const MarkerAnimated = Marker.Animated;
 export const OverlayAnimated = Overlay.Animated;
 
-class RNGMSService {
+export class RNGMSService {
  
   provideAPIKey(key, provider) {
     if (Platform.OS === 'android') {

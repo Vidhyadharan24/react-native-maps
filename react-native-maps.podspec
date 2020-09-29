@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/vidhyadharan24/react-native-maps.git", :tag=> "v#{s.version}" }
   s.source_files  = "lib/ios/AirMaps/**/*.{h,m}"
 
-  s.dependency 'React'
+  s.dependency 'React-Core'
 end

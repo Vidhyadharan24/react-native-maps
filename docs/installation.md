@@ -248,7 +248,7 @@ You can find the latest `playServicesVersion` by checking [https://developers.go
 
 3.2 (React Native all versions) If you do **not** have *project-wide properties* defined and have a
 different play-services version than the one included in this library,
-use the following instead (switch 10.0.1 for the desired version):
+use the following instead (switch 17.0.0 and/or 17.2.1 for the desired versions):
 
 ```groovy
 ...
@@ -258,8 +258,8 @@ dependencies {
        exclude group: 'com.google.android.gms', module: 'play-services-base'
        exclude group: 'com.google.android.gms', module: 'play-services-maps'
    }
-   implementation 'com.google.android.gms:play-services-base:10.0.1'
-   implementation 'com.google.android.gms:play-services-maps:10.0.1'
+   implementation 'com.google.android.gms:play-services-base:17.2.1'
+   implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
 ```
 
@@ -274,7 +274,7 @@ dependencies {
      android:name="com.google.android.geo.API_KEY"
      android:value="Your Google maps API Key Here"/>
   
-   <!-- You will also only need to add this uses-libray tag -->
+   <!-- You will also only need to add this uses-library tag -->
    <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 </application>
 ```
@@ -332,6 +332,15 @@ project from the URLs below:
 - [Google Maps SDK iOS (if required)](https://console.developers.google.com/apis/library/maps-ios-backend.googleapis.com)
 
 For reference, you may read the relevant issue reports: ([#118](https://github.com/react-native-community/react-native-maps/issues/118), [#176](https://github.com/react-native-community/react-native-maps/issues/176), [#684](https://github.com/react-native-community/react-native-maps/issues/684)).
+
+### The map background is gray (Google Maps)
+
+If you get grey screen on android device create google_maps_api.xml in android/app/src/main/res/values.
+```xml
+<resources>
+  <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">(api key here)</string>
+</resources>
+```
 
 ### No map whatsoever
 

@@ -827,7 +827,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
     map.animateCamera(CameraUpdateFactory.newLatLng(coordinate), duration, null);
   }
 
-  public void fitToElements(boolean animated) {
+  public void fitToElements(ReadableMap edgePadding, boolean animated) {
     if (map == null) return;
 
     LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -845,6 +845,12 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
     if (addedPosition) {
       LatLngBounds bounds = builder.build();
       CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, baseMapPadding);
+
+      if (edgePadding != null) {
+        map.setPadding(edgePadding.getInt("left"), edgePadding.getInt("top"),
+          edgePadding.getInt("right"), edgePadding.getInt("bottom"));
+      }
+
       if (animated) {
         map.animateCamera(cu);
       } else {
@@ -925,10 +931,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, baseMapPadding);
 
     if (edgePadding != null) {
-      map.setPadding(edgePadding.getInt("left") + baseLeftMapPadding,
-              edgePadding.getInt("top") + baseTopMapPadding,
-              edgePadding.getInt("right") + baseRightMapPadding,
-              edgePadding.getInt("bottom") + baseBottomMapPadding);
+      appendMapPadding(edgePadding.getInt("left"), edgePadding.getInt("top"), edgePadding.getInt("right"), edgePadding.getInt("bottom"));
     }
 
     if (animated) {
@@ -938,6 +941,24 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
     }
     // Move the google logo to the default base padding value.
     map.setPadding(baseLeftMapPadding, baseTopMapPadding, baseRightMapPadding, baseBottomMapPadding);
+  }
+
+  private void appendMapPadding(int iLeft,int iTop, int iRight, int iBottom) {
+    int left;
+    int top;
+    int right;
+    int bottom;
+    double density = getResources().getDisplayMetrics().density;
+
+    left = (int) (iLeft * density);
+    top = (int) (iTop * density);
+    right = (int) (iRight * density);
+    bottom = (int) (iBottom * density);
+
+    map.setPadding(left + baseLeftMapPadding,
+            top + baseTopMapPadding,
+            right + baseRightMapPadding,
+            bottom + baseBottomMapPadding);
   }
 
   public double[][] getMapBoundaries() {
